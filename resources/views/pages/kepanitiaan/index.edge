@@ -1,0 +1,55 @@
+@layout.app({ title: 'Kelola Panitia - SyncMA' })
+
+@slot('main')
+<section class="p-6">
+  <div class="max-w-5xl mx-auto">
+    <h1 class="text-2xl font-bold text-cyan-700 mb-4">Panitia Kegiatan: {{ kegiatan.nama }}</h1>
+
+    <a href="{{ route('kepanitiaan.create', { kegiatan_id: kegiatan.id }) }}" class="bg-cyan-600 hover:bg-cyan-700 text-white px-4 py-2 rounded shadow mb-4 inline-block">
+      + Tambah Panitia
+    </a>
+
+    @if(flashMessages.has('success'))
+      <div class="bg-green-100 text-green-700 p-3 rounded mb-4">{{ flashMessages.get('success') }}</div>
+    @endif
+
+    @if(flashMessages.has('error'))
+      <div class="bg-red-100 text-red-700 p-3 rounded mb-4">{{ flashMessages.get('error') }}</div>
+    @endif
+
+    <div class="bg-white rounded shadow overflow-x-auto">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-cyan-600 text-white">
+          <tr>
+            <th class="px-6 py-3 text-left text-sm font-semibold">#</th>
+            <th class="px-6 py-3 text-left text-sm font-semibold">Nama Anggota</th>
+            <th class="px-6 py-3 text-left text-sm font-semibold">Jabatan</th>
+            <th class="px-6 py-3 text-right text-sm font-semibold">Aksi</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200">
+          @each((panitia, index) in kegiatan.kepanitiaan)
+            <tr>
+              <td class="px-6 py-4">{{ index + 1 }}</td>
+              <td class="px-6 py-4">{{ panitia.anggota.nama }}</td>
+              <td class="px-6 py-4">{{ panitia.jabatan }}</td>
+              <td class="px-6 py-4 text-right space-x-2">
+                <a href="{{ route('kepanitiaan.edit', { kegiatan_id: kegiatan.id, id: panitia.id }) }}" class="text-blue-600 hover:underline">Edit</a>
+                <form method="POST" action="{{ route('kepanitiaan.destroy', { kegiatan_id: kegiatan.id, id: panitia.id }) }}?_method=DELETE" onsubmit="return confirm('Yakin ingin menghapus panitia ini?')" class="inline">
+                  {{ csrfField() }}
+                  <button type="submit" class="text-red-600 hover:underline">Hapus</button>
+                </form>
+              </td>
+            </tr>
+          @else
+            <tr>
+              <td colspan="4" class="text-center py-6 text-gray-500">Belum ada panitia untuk kegiatan ini.</td>
+            </tr>
+          @endeach
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+@endslot
+@end

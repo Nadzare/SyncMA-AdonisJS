@@ -1,0 +1,60 @@
+@layout.app({ title: 'Data Kegiatan - SyncMA' })
+
+@slot('main')
+<section class="p-6">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-bold text-cyan-700">Daftar Kegiatan</h1>
+    <a href="{{ route('kegiatan.create') }}" class="bg-cyan-600 text-white px-4 py-2 rounded shadow hover:bg-cyan-700 transition">
+      + Tambah
+    </a>
+  </div>
+
+  @if(flashMessages.has('success'))
+    <div class="bg-green-100 text-green-700 p-3 rounded mb-4 text-sm">
+      {{ flashMessages.get('success') }}
+    </div>
+  @endif
+
+  <div class="overflow-x-auto bg-white rounded shadow">
+    <table class="min-w-full divide-y divide-gray-200">
+      <thead class="bg-cyan-600 text-white">
+        <tr>
+          <th class="px-6 py-3 text-left text-xs font-semibold uppercase">#</th>
+          <th class="px-6 py-3 text-left text-xs font-semibold uppercase">Nama</th>
+          <th class="px-6 py-3 text-left text-xs font-semibold uppercase">Tanggal</th>
+          <th class="px-6 py-3 text-left text-xs font-semibold uppercase">Organisasi</th>
+          <th class="px-6 py-3 text-left text-xs font-semibold uppercase">Lokasi</th>
+          <th class="px-6 py-3 text-right text-xs font-semibold uppercase">Aksi</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200">
+        @if(kegiatans && kegiatans.length)
+          @each((item, index) in kegiatans)
+            <tr>
+              <td class="px-6 py-4 text-sm">{{ index + 1 }}</td>
+              <td class="px-6 py-4 text-sm">{{ item.nama }}</td>
+              <td class="px-6 py-4 text-sm">{{ item.tgl_pelaksanaan.toFormat('dd LLL yyyy') }}</td>
+              <td class="px-6 py-4 text-sm">{{ item.organisasi.namaOrganisasi }}</td>
+              <td class="px-6 py-4 text-sm">{{ item.lokasi.nama_lokasi }}</td>
+<td class="px-6 py-4 text-sm text-right space-x-2">
+  <a href="{{ route('kegiatan.edit', { id: item.id }) }}" class="text-yellow-600 hover:underline">Edit</a>
+  <a href="/kegiatan/{{ item.id }}/kepanitiaan" class="text-blue-600 hover:underline">Kelola Panitia</a>
+  <form method="POST" action="{{ route('kegiatan.destroy', { id: item.id }) }}" class="inline">
+    {{ csrfField() }}
+    <input type="hidden" name="_method" value="DELETE" />
+    <button onclick="return confirm('Yakin hapus kegiatan?')" class="text-red-600 hover:underline">Hapus</button>
+  </form>
+</td>
+            </tr>
+          @endeach
+        @else
+          <tr>
+            <td colspan="6" class="text-center text-gray-500 py-8">Belum ada data kegiatan.</td>
+          </tr>
+        @endif
+      </tbody>
+    </table>
+  </div>
+</section>
+@endslot
+@end

@@ -1,0 +1,82 @@
+@layout.landapp({ title: 'Register - SyncMA' })
+
+@slot('main')
+<section class="min-h-screen flex items-center justify-center bg-gray-100">
+  <div class="w-full max-w-md bg-white p-8 rounded-lg shadow-md">
+    <h2 class="text-2xl font-bold text-center text-cyan-700 mb-6">Daftar Akun SyncMA</h2>
+
+    @if(flashMessages.get('error'))
+      <div class="bg-red-100 text-red-700 p-3 rounded mb-4 text-sm">
+        {{ flashMessages.get('error') }}
+      </div>
+    @endif
+
+    @if(flashMessages.get('success'))
+      <div class="bg-green-100 text-green-700 p-3 rounded mb-4 text-sm">
+        {{ flashMessages.get('success') }}
+      </div>
+    @endif
+
+    <form method="POST" action="/register" class="space-y-5">
+      {{ csrfField() }} <!-- Ditambahkan -->
+      <div>
+        <label for="fullName" class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
+        <input
+          type="text"
+          name="fullName"
+          id="fullName"
+          class="mt-1 block w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+          required
+        >
+      </div>
+
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          class="mt-1 block w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+          required
+        >
+      </div>
+
+      <div>
+        <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          class="mt-1 block w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+          required
+        >
+      </div>
+
+      <div>
+        <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Konfirmasi Password</label>
+        <input
+          type="password"
+          name="password_confirmation"
+          id="password_confirmation"
+          class="mt-1 block w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+          required
+        >
+      </div>
+
+      <button
+        type="submit"
+        class="w-full bg-cyan-600 text-white py-2 px-4 rounded hover:bg-cyan-700 transition"
+      >
+        Daftar
+      </button>
+    </form>
+
+    <p class="text-center text-sm text-gray-600 mt-6">
+      Sudah punya akun?
+      <a href="/login" class="text-cyan-600 hover:underline">Login di sini</a>
+    </p>
+  </div>
+</section>
+@endslot
+
+@end

@@ -1,0 +1,81 @@
+@layout.landapp({ title: 'Selamat Datang di SyncMA' })
+
+@slot('meta')
+  <meta name="description" content="Landing page SyncMA">
+@endslot
+
+@slot('main')
+
+<!-- Navbar -->
+<header class="fixed top-0 left-0 w-full bg-white shadow z-50">
+  <div class="max-w-7xl mx-auto flex justify-between items-center py-4 px-6">
+    <a href="#" class="text-2xl font-bold text-cyan-600">SyncMA</a>
+    <nav class="hidden md:flex space-x-4">
+      <a href="#home" class="text-gray-700 hover:text-cyan-600 font-medium">Beranda</a>
+      <a href="#about" class="text-gray-700 hover:text-cyan-600 font-medium">Tentang</a>
+      <a href="#contact" class="text-gray-700 hover:text-cyan-600 font-medium">Kontak</a>
+      <a href="/login" class="bg-cyan-600 text-white px-4 py-2 rounded-lg shadow hover:bg-cyan-700 transition">Login</a>
+      <a href="/register" class="border border-cyan-600 text-cyan-600 px-4 py-2 rounded-lg hover:bg-cyan-50 transition">Register</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero Section -->
+<section id="home" class="min-h-screen flex items-center justify-center bg-gradient-to-br from-cyan-700 to-cyan-300 text-white pt-32 px-4">
+  <div class="text-center max-w-2xl">
+    <h1 class="text-4xl md:text-5xl font-extrabold mb-4">
+      Selamat Datang di <span>SyncMA</span>
+    </h1>
+    <p class="text-lg mb-6 leading-relaxed">
+      Platform manajemen kegiatan organisasi mahasiswa yang efisien, modern, dan responsif.
+    </p>
+    <a href="#about" class="inline-block bg-white text-cyan-600 px-6 py-3 rounded-full font-semibold shadow hover:bg-gray-100 transition-all">
+      Pelajari Lebih Lanjut
+    </a>
+  </div>
+</section>
+
+<!-- Tentang Section -->
+<section id="about" class="py-24 bg-gray-50 px-4">
+  <div class="max-w-4xl mx-auto text-center">
+    <h2 class="text-3xl md:text-4xl font-bold text-cyan-700 mb-6">Tentang SyncMA</h2>
+    <p class="text-gray-700 text-lg leading-relaxed">
+      SyncMA adalah sistem informasi berbasis web yang dirancang untuk membantu organisasi kemahasiswaan dalam mengelola kegiatan, anggota, panitia, dan laporan secara efisien.
+      Dengan antarmuka modern dan fitur interaktif, SyncMA mempermudah pelacakan aktivitas organisasi dan meningkatkan produktivitas mahasiswa.
+    </p>
+  </div>
+</section>
+
+<!-- Kontak Section -->
+<section id="contact" class="py-24 bg-white px-4">
+  <div class="max-w-3xl mx-auto">
+    <h2 class="text-3xl md:text-4xl font-bold text-center text-cyan-700 mb-10">Hubungi Kami</h2>
+    <form class="space-y-6">
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Nama</label>
+        <input type="text" class="mt-1 w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-300" required>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Email</label>
+        <input type="email" class="mt-1 w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-300" required>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Pesan</label>
+        <textarea rows="5" class="mt-1 w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-300" required></textarea>
+      </div>
+      <div class="text-center">
+        <button type="submit" class="bg-cyan-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-cyan-700 transition shadow">
+          Kirim Pesan
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gray-100 text-center py-6 mt-10 text-sm text-gray-500">
+  &copy; {{ new Date().getFullYear() }} SyncMA. Dibuat dengan ❤️ oleh NadzareKA.
+</footer>
+
+@endslot
+@end
